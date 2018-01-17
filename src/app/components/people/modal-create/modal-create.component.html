@@ -1,0 +1,79 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">People Management</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h3>New People</h3>
+      <form [formGroup]="peopleForm" novalidate="novalidate">
+        <div class="form-group">
+          <input class="form-control"
+                 type="hidden"
+                 name="id"
+                 formControlName="id">
+        </div>
+        <div class="form-group">
+          <input class="form-control" [ngClass]="{'is-invalid':peopleForm.get('name').touched && !peopleForm.get('name').valid}"
+                 name="name"
+                 formControlName="name"
+                 placeholder="People name">
+          <div *ngIf="peopleForm.get('name').errors?.required && peopleForm.get('name').touched" [ngClass]="{'form-control-feedback':peopleForm.get('name').errors?.required}">
+            Name field is required
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="form-control" [ngClass]="{'is-invalid':peopleForm.get('nit').touched && !peopleForm.get('nit').valid}"
+                 type="number"
+                 name="nit"
+                 formControlName="nit"
+                 placeholder="People nit">
+          <div *ngIf="peopleForm.get('nit').errors?.required && peopleForm.get('nit').touched" [ngClass]="{'form-control-feedback':peopleForm.get('nit').errors?.required}">
+            Nit field is required
+          </div>
+        </div>
+        <div class="form-group">
+          <select class="form-control" [ngClass]="{'is-invalid':peopleForm.get('genre').touched && !peopleForm.get('genre').valid}"
+                  name="genre"
+                  formControlName="genre">
+            <option value="">Seleccione un genero</option>
+            <option *ngFor="let genre of genres"
+                    [value]="genre.value"> {{ genre.name }} </option>
+          </select>
+          <div *ngIf="peopleForm.get('genre').errors?.required && peopleForm.get('genre').touched" [ngClass]="{'form-control-feedback':peopleForm.get('genre').errors?.required}">
+            Genre field is required
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="form-control" [ngClass]="{'is-invalid':peopleForm.get('dateOfBirth').touched && !peopleForm.get('dateOfBirth').valid}"
+                 type="text"
+                 name="dateOfBirth"
+                 readonly="readonly"
+                 formControlName="dateOfBirth"
+                 placeholder="yyyy-mm-dd"
+                 ngbDatepicker #d="ngbDatepicker"
+                 (click)="d.toggle()">
+          <div *ngIf="peopleForm.get('dateOfBirth').errors?.required && peopleForm.get('dateOfBirth').touched" [ngClass]="{'form-control-feedback':peopleForm.get('dateOfBirth').errors?.required}">
+            Date of Birth field is required
+          </div>
+          <div *ngIf="peopleForm.get('dateOfBirth').errors?.badage && peopleForm.get('dateOfBirth').touched" [ngClass]="{'form-control-feedback':peopleForm.get('dateOfBirth').errors?.badage}">
+            The age must be over 18 and under 60 years
+          </div>
+        </div>
+        <div class="form-group">
+          <input class="form-control"
+                 type="hidden"
+                 name="photo"
+                 formControlName="photo">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      <button type="button" class="btn btn-outline-primary" [disabled]="!peopleForm.valid" (click)="save()">Save</button>
+    </div>
+  </div>
+</div>
+
