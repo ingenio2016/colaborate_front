@@ -3,7 +3,11 @@ export interface People {
   name: string;
   nit: number;
   genre: string;
-  dateOfBirth: Date;
+  dateOfBirth: {
+    year: number;
+    month: number;
+    day: number
+  },
   photo: string;
 }
 

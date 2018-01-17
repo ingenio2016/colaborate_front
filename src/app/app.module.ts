@@ -14,6 +14,9 @@ import { DetailsComponent } from './components/people/details/details.component'
 import { ModalCreateComponent } from './components/people/modal-create/modal-create.component';
 // People Service
 import { PeopleService } from './providers/people.service';
+import {HttpClientModule} from '@angular/common/http';
+import { NoPhotoPipe } from './pipes/no-photo.pipe';
+import { CapitalizedPipe } from './pipes/capitalized.pipe';
 
 
 @NgModule({
@@ -24,13 +27,16 @@ import { PeopleService } from './providers/people.service';
     PeopleComponent,
     ListComponent,
     DetailsComponent,
-    ModalCreateComponent],
+    ModalCreateComponent,
+    NoPhotoPipe,
+    CapitalizedPipe],
   imports: [
     BrowserModule,
     APP_ROUTING,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     PeopleService

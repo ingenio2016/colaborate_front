@@ -1,7 +1,30 @@
 <h3>People List</h3>
 <hr>
-
 <!-- Modal Component -->
 <div class="pull-right">
-
+<app-modal-create></app-modal-create>
+</div>
+<div class="table-responsive" *ngIf="persons">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Photo</th>
+      <th scope="col">People Name</th>
+      <th scope="col">Nit</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Date Of Birth</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td><img [src]="person.photo | noPhoto" class="img-fluid img-thumbnail resize"></td>
+      <td>{{ person.name | capitalized }}</td>
+      <td>{{ person.nit }}</td>
+      <td>{{ person.genre }}</td>
+      <td>{{ person.dateOfBirth | date }}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
