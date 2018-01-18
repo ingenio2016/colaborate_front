@@ -1,13 +1,9 @@
-export interface People {
+export interface Person {
   id: number;
   name: string;
   nit: number;
   genre: string;
-  dateOfBirth: {
-    year: number;
-    month: number;
-    day: number
-  },
+  dateOfBirth: string;
   photo: string;
 }
 

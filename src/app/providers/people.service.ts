@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from "@angular/http";
-import { People } from '../interfaces/people.interface'
+import { Person } from '../interfaces/people.interface'
 import 'rxjs/Rx';
 import {HttpClient} from "@angular/common/http";
 
@@ -12,8 +12,7 @@ export class PeopleService {
   constructor( private http: HttpClient ) {
   }
 
-  savePeople( people: People ) {
-    let dateOfBirth = people.dateOfBirth.year+'-'+people.dateOfBirth.month+'-'+people.dateOfBirth.day;
+  savePeople( people: Person, dateOfBirth: string ) {
     return this.http.post(  this.urlBack, {name: people.name, nit: people.nit, genre: people.genre, dateOfBirth: dateOfBirth})
       .map( res=>{
         return res;

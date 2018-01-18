@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { People } from '../../../interfaces/people.interface';
+import { Person } from '../../../interfaces/people.interface';
 import { NgbModal, ModalDismissReasons, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PeopleService } from '../../../providers/people.service';
 
@@ -12,7 +12,7 @@ import { PeopleService } from '../../../providers/people.service';
 export class ModalCreateComponent implements OnInit {
   closeResult: string;
   // People structure
-  people: People = {
+  person: Person = {
     id: null,
     name: '',
     nit: null,
@@ -48,7 +48,7 @@ export class ModalCreateComponent implements OnInit {
       'photo': new FormControl('')
     });
 
-    this.peopleForm.setValue( this.people );
+    this.peopleForm.setValue( this.person );
   }
 
   ngOnInit() {
@@ -89,9 +89,9 @@ export class ModalCreateComponent implements OnInit {
   }
 
   save() {
-    console.log(this.peopleForm);
     if(this.peopleForm.value.id == null){
-      this._peopleService.savePeople( this.peopleForm.value ).subscribe( (data) => {
+      let dateOfBirth = this.peopleForm.value.dateOfBirth.year+'-'+this.peopleForm.value.dateOfBirth.month+'-'+this.peopleForm.value.dateOfBirth.day;
+      this._peopleService.savePeople( this.peopleForm.value, dateOfBirth ).subscribe( (data) => {
         console.log('Saved');
         this.modalReference.close();
         // Pending redirect to Edit View //
