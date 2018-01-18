@@ -6,7 +6,11 @@
     </button>
   </div>
   <div class="modal-body">
-      <h4>New People</h4>
+      <h4>New Person</h4>
+      <br>
+      <p>
+        <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+      </p>
       <form [formGroup]="peopleForm" novalidate="novalidate">
         <div class="form-group">
           <input class="form-control"
@@ -18,7 +22,7 @@
           <input class="form-control" [ngClass]="{'is-invalid':peopleForm.get('name').touched && !peopleForm.get('name').valid}"
                  name="name"
                  formControlName="name"
-                 placeholder="People name">
+                 placeholder="Name">
           <div *ngIf="peopleForm.get('name').errors?.required && peopleForm.get('name').touched" [ngClass]="{'form-control-feedback':peopleForm.get('name').errors?.required}">
             Name field is required
           </div>
@@ -28,7 +32,7 @@
                  type="number"
                  name="nit"
                  formControlName="nit"
-                 placeholder="People nit">
+                 placeholder="Nit">
           <div *ngIf="peopleForm.get('nit').errors?.required && peopleForm.get('nit').touched" [ngClass]="{'form-control-feedback':peopleForm.get('nit').errors?.required}">
             Nit field is required
           </div>
@@ -50,7 +54,7 @@
                  name="dateOfBirth"
                  readonly="readonly"
                  formControlName="dateOfBirth"
-                 placeholder="yyyy-mm-dd"
+                 placeholder="Date Of Birth"
                  ngbDatepicker #d="ngbDatepicker"
                  (click)="d.toggle()">
           <div *ngIf="peopleForm.get('dateOfBirth').errors?.required && peopleForm.get('dateOfBirth').touched" [ngClass]="{'form-control-feedback':peopleForm.get('dateOfBirth').errors?.required}">
@@ -73,6 +77,8 @@
       <button type="button" class="btn btn-outline-primary" [disabled]="!peopleForm.valid" (click)="save()">Save</button>
     </div>
 </ng-template>
-<button class="btn btn-lg btn-outline-primary btn-sm" (click)="open(content)">New People</button>
+<div class="pull-right">
+  <button class="btn btn-lg btn-outline-primary btn-sm" (click)="open(content)">New Person</button>
+</div>
 <br>
 

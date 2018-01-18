@@ -1,0 +1,57 @@
+<ng-template #content let-c="close" let-di="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Children Management</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h4>New Children</h4>
+    <br>
+    <p>
+      <ngb-alert *ngIf="errorMessage" type="danger" (close)="errorMessage = null">{{ errorMessage }}</ngb-alert>
+    </p>
+    <form [formGroup]="childrenForm" novalidate="novalidate">
+      <div class="form-group">
+        <input class="form-control"
+               type="hidden"
+               name="id"
+               formControlName="id">
+      </div>
+      <div class="form-group">
+        <input class="form-control"
+               type="hidden"
+               name="person_id"
+               formControlName="person_id">
+      </div>
+      <div class="form-group">
+        <input class="form-control" [ngClass]="{'is-invalid':childrenForm.get('name').touched && !childrenForm.get('name').valid}"
+               name="name"
+               formControlName="name"
+               placeholder="Name">
+        <div *ngIf="childrenForm.get('name').errors?.required && childrenForm.get('name').touched" [ngClass]="{'form-control-feedback':childrenForm.get('name').errors?.required}">
+          Name field is required
+        </div>
+      </div>
+      <div class="form-group">
+        <input class="form-control" [ngClass]="{'is-invalid':childrenForm.get('age').touched && !childrenForm.get('age').valid}"
+               type="number"
+               name="age"
+               formControlName="age"
+               placeholder="Age">
+        <div *ngIf="childrenForm.get('age').errors?.required && childrenForm.get('age').touched" [ngClass]="{'form-control-feedback':childrenForm.get('age').errors?.required}">
+          Age field is required
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-primary" [disabled]="!childrenForm.valid" (click)="save()">Save</button>
+  </div>
+</ng-template>
+<div class="pull-right">
+  <button class="btn btn-lg btn-outline-primary btn-sm" (click)="open(content)">New Child</button>
+</div>
+<br>
+

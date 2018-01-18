@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Person } from '../../../interfaces/people.interface';
 import { NgbModal, ModalDismissReasons, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PeopleService } from '../../../providers/people.service';
+import {Subject} from 'rxjs/Subject';
+import {debounceTime} from 'rxjs/operator/debounceTime';
 
 @Component({
   selector: 'app-modal-create',
@@ -10,6 +12,8 @@ import { PeopleService } from '../../../providers/people.service';
   styleUrls: ['./modal-create.component.scss']
 })
 export class ModalCreateComponent implements OnInit {
+  private _success = new Subject<string>();
+
   closeResult: string;
   // People structure
   person: Person = {
@@ -35,7 +39,7 @@ export class ModalCreateComponent implements OnInit {
   // People Form
   peopleForm: FormGroup;
   modalReference: any;
-
+  errorMessage: string;
   constructor( private modalService: NgbModal, config: NgbDatepickerConfig, private _peopleService: PeopleService ) {
     config.minDate = {year: 1900, month: 1, day: 1};
     config.maxDate = {year: 2099, month: 12, day: 31};
@@ -52,6 +56,8 @@ export class ModalCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._success.subscribe((message) => this.errorMessage = message);
+    debounceTime.call(this._success, 5000).subscribe(() => this.errorMessage = null);
   }
 
   open(content) {
@@ -92,10 +98,12 @@ export class ModalCreateComponent implements OnInit {
     if(this.peopleForm.value.id == null){
       let dateOfBirth = this.peopleForm.value.dateOfBirth.year+'-'+this.peopleForm.value.dateOfBirth.month+'-'+this.peopleForm.value.dateOfBirth.day;
       this._peopleService.savePeople( this.peopleForm.value, dateOfBirth ).subscribe( (data) => {
-        console.log('Saved');
         this.modalReference.close();
         // Pending redirect to Edit View //
-      })
+      },error => {
+        this._success.next('An error has Ocurred!!');
+        console.log(error);
+      });
     }
   }
 

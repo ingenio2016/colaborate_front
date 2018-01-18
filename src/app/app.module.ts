@@ -18,6 +18,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { NoPhotoPipe } from './pipes/no-photo.pipe';
 import { CapitalizedPipe } from './pipes/capitalized.pipe';
 import { GenrePipe } from './pipes/genre.pipe';
+import { ModalChildrenCreateComponent } from './components/people/modal-children-create/modal-children-create.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { GenrePipe } from './pipes/genre.pipe';
     ModalCreateComponent,
     NoPhotoPipe,
     CapitalizedPipe,
-    GenrePipe],
+    GenrePipe,
+    ModalChildrenCreateComponent],
   imports: [
     BrowserModule,
     APP_ROUTING,

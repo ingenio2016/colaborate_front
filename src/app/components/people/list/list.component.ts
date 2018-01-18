@@ -12,6 +12,11 @@ export class ListComponent implements OnInit {
   constructor( private _peopleService: PeopleService ) {
     this._peopleService.getPersons().subscribe( (data) => {
       this.persons = data;
+      this.persons.forEach(function( person ) {
+        let date = new Date(person.dateOfBirth);
+        date.setDate(date.getDate() + 1);
+        person.dateOfBirth = date;
+      })
     })
   }
 
