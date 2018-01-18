@@ -17,6 +17,7 @@ import { PeopleService } from './providers/people.service';
 import {HttpClientModule} from '@angular/common/http';
 import { NoPhotoPipe } from './pipes/no-photo.pipe';
 import { CapitalizedPipe } from './pipes/capitalized.pipe';
+import { GenrePipe } from './pipes/genre.pipe';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CapitalizedPipe } from './pipes/capitalized.pipe';
     DetailsComponent,
     ModalCreateComponent,
     NoPhotoPipe,
-    CapitalizedPipe],
+    CapitalizedPipe,
+    GenrePipe],
   imports: [
     BrowserModule,
     APP_ROUTING,

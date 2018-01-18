@@ -18,7 +18,10 @@
 
 5. run yarn
 
+6. Download the Environment files from https://drive.google.com/drive/folders/1E-ihBVepk0vVAxe4is2eEA0uieeRpwmS?usp=sharing
 
-6. run ng serve
+7. Replace the environment files on the path: src\environments
 
-7. open http://localhost:4200
+8. run ng serve
+
+9. open http://localhost:4200

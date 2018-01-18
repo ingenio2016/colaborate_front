@@ -21,14 +21,14 @@
       "styles": [
         "styles.scss",
         "./assets/bootstrap/css/bootstrap.min.css",
-        "./assets/fontawesome/css/font-awesome.min.css",
         "./assets/dist/datepicker.css"
       ],
       "scripts": [
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "./assets/jquery/jquery.min.js",
         "./assets/bootstrap/js/bootstrap.min.js",
-        "./assets/dist/datepicker.js"
+        "./assets/dist/datepicker.js",
+        "./assets/fontawesome/fontawesome-all.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

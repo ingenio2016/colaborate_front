@@ -14,6 +14,7 @@
       <th scope="col">Nit</th>
       <th scope="col">Genre</th>
       <th scope="col">Date Of Birth</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -22,8 +23,10 @@
       <td><img [src]="person.photo | noPhoto" class="img-fluid img-thumbnail resize"></td>
       <td>{{ person.name | capitalized }}</td>
       <td>{{ person.nit }}</td>
-      <td>{{ person.genre }}</td>
+      <td><img [src]="person.genre | genre" class="genreimage"></td>
       <td>{{ person.dateOfBirth | date }}</td>
+      <td><a href="#" [routerLink]="['/people',person.id, 'details']"><i class="fas fa-edit fa-2x"></i></a>
+      </td>
     </tr>
     </tbody>
   </table>

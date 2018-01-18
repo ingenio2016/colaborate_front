@@ -3,12 +3,13 @@ import { Http, Headers } from "@angular/http";
 import { Person } from '../interfaces/people.interface'
 import 'rxjs/Rx';
 import {HttpClient} from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class PeopleService {
 
   // Http Url Backend
-  urlBack: string = 'http://localhost:3000/parent';
+  urlBack: string = environment.backendUrl+'/parent';
   constructor( private http: HttpClient ) {
   }
 
@@ -21,6 +22,13 @@ export class PeopleService {
 
   getPersons() {
     return this.http.get(  this.urlBack )
+      .map( res=>{
+        return res;
+      })
+  }
+
+  getPerson( id: number ) {
+    return this.http.get(  this.urlBack + '/' + id )
       .map( res=>{
         return res;
       })

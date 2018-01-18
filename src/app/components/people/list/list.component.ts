@@ -12,7 +12,6 @@ export class ListComponent implements OnInit {
   constructor( private _peopleService: PeopleService ) {
     this._peopleService.getPersons().subscribe( (data) => {
       this.persons = data;
-      console.log(this.persons);
     })
   }
 
